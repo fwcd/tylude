@@ -1,0 +1,15 @@
+{
+    "name": "peano-typescript",
+    "version": "0.0.1",
+    "author": "fwcd",
+    "description": "Peano arithmetic in TypeScript",
+    "license": "MIT",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "peano",
+        "metaprogramming"
+    ]
+}
