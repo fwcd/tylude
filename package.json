@@ -1,8 +1,8 @@
 {
-    "name": "peano-typescript",
+    "name": "tylude",
     "version": "0.0.1",
     "author": "fwcd",
-    "description": "Peano arithmetic in TypeScript",
+    "description": "Type-level programming for TypeScript",
     "license": "MIT",
     "main": "index.js",
     "scripts": {
