@@ -17,6 +17,14 @@ proveEqual<Add<Two, Five>, Seven>();
 proveEqual<Sub<Five, Three>, Two>();
 proveEqual<Four, Mult<Two, Two>>();
 
+// With comparison operators, we can check that
+// the numbers are ordered correctly.
+prove<Greater<One, Zero>>();
+prove<Less<One, Three>>();
+prove<Not<GreaterOrEqual<Four, Eight>>>();
+prove<GreaterOrEqual<Eight, Eight>>();
+prove<LessOrEqual<Two, Three>>();
+
 // We can perform operations on lists too.
 // This only type-checks if [1] + [2] = [1, 2]
 proveEqual<
@@ -35,6 +43,6 @@ proveEqual<
 
 // Boolean operators
 proveEqual<And<True, False>, False>();
-prove<Equals<And<True, True>, True>>();
+prove<Equal<And<True, True>, True>>();
 prove<Or<True, False>>();
 prove<Not<Not<True>>>();

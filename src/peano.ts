@@ -44,3 +44,18 @@ type Mult<N, M> = N extends Succ<infer I>
     : (N extends Zero ?
         Zero
         : Fail<"Cannot multiply non-number!">)
+
+// Comparisons
+type LessOrEqual<N, M> = N extends Succ<infer I>
+    ? (M extends Succ<infer J>
+        ? LessOrEqual<I, J>
+        : (M extends Zero
+            ? False
+            : Fail<"Cannot compare when right-hand side is non-number!">))
+    : (N extends Zero
+        ? True
+        : Fail<"Cannot compare when left-hand side is non-number!">);
+
+type Greater<N, M> = Catch<LessOrEqual<N, M>, Not<LessOrEqual<N, M>>>;
+type GreaterOrEqual<N, M> = Catch<LessOrEqual<N, M>, Or<Greater<N, M>, Equal<N, M>>>;
+type Less<N, M> = Catch<LessOrEqual<N, M>, Not<GreaterOrEqual<N, M>>>;
