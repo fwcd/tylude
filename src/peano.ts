@@ -50,7 +50,7 @@ type Mult<N, M> = N extends Succ<infer Nminus1>
         ? Zero
         : Fail<"Cannot multiply non-number!">)
 
-// Comparisons (by repeatedly subtracting both sides until one of them is 0)
+// '<=' implementation (by repeatedly subtracting both sides until one of them is 0)
 type LessOrEqual<N, M> = N extends Succ<infer Nminus1>
     ? (M extends Succ<infer J>
         ? LessOrEqual<Nminus1, J>
@@ -60,21 +60,25 @@ type LessOrEqual<N, M> = N extends Succ<infer Nminus1>
     : (N extends Zero
         ? True
         : Fail<"Cannot compare when left-hand side is non-number!">);
+
+// '>', '>=' and '<' implementation (derived from '<=')
 type Greater<N, M> = Catch<LessOrEqual<N, M>, Not<LessOrEqual<N, M>>>;
 type GreaterOrEqual<N, M> = Catch<LessOrEqual<N, M>, Or<Greater<N, M>, Equal<N, M>>>;
 type Less<N, M> = Catch<LessOrEqual<N, M>, Not<GreaterOrEqual<N, M>>>;
 
-// Division with remainder (by repeatedly subtracting)
+// Division with remainder implementation (by repeatedly subtracting)
 type DivWithRemImpl<N, M, Q> = M extends Zero
     ? Fail<"Cannot divide by zero!">
     : (Less<N, M> extends True
         ? [Q, N]
         : DivWithRemImpl<Sub<N, M>, M, Succ<Q>>);
 
+// Division
 type Div<N, M> = DivWithRemImpl<N, M, Zero> extends [infer Q, infer _]
     ? Q
     : Fail<"Cannot perform division!">;
 
+// Remainder
 type Rem<N, M> = DivWithRemImpl<N, M, Zero> extends [infer _, infer R]
     ? R
     : Fail<"Cannot compute remainder!">;
