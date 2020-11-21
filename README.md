@@ -20,6 +20,8 @@ type Add<N, M> = N extends Succ<infer Nminus1>
     ? Succ<Add<Nminus1, M>>
     : M;
 
+function proveExtends<T1, T2 extends T1>() {}
+
 // Example: Only type-checks if 1 + 1 = 2
 proveExtends<Add<One, One>, Two>();
 ```
@@ -40,6 +42,8 @@ type List3<X, Y, Z> = Cons<X, List2<Y, Z>>;
 type Append<Xs, Ys> = Xs extends Cons<infer X, infer Rs>
     ? Cons<X, Append<Rs, Ys>>
     : Ys;
+
+function proveExtends<T1, T2 extends T1>() {}
 
 // Example: Only type-checks if [1] + [2, 3] = [1, 2, 3]
 proveExtends<
