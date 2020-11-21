@@ -23,3 +23,9 @@ equal<
     >,
     Cons<One, Cons<Two, Nil>>
 >();
+
+// Similarly, we can use aliases for small lists:
+equal<
+    Append<List2<One, Two>, List3<Three, Four, Five>>,
+    List5<One, Two, Three, Four, Five>
+>();
