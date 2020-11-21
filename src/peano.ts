@@ -17,11 +17,13 @@ type Ten = Succ<Nine>;
 // Addition
 type Add<N, M> = N extends Succ<infer I>
     ? Succ<Add<I, M>>
-    : M;
+    : (N extends Zero
+        ? M
+        : Fail<"Cannot add non-number!">);
 
 // Subtraction
 type Sub<N, M> = M extends Succ<infer J>
     ? (N extends Succ<infer I>
         ? Sub<I, J>
-        : Fail) // cannot subtract below zero
+        : Fail<"Cannot subtract below zero!">)
     : N;

@@ -1,2 +1,2 @@
 // Type representing failed computation
-type Fail = { fail: true };
+type Fail<M> = { fail: M };

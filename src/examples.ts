@@ -13,3 +13,13 @@ equal<Add<Two, Five>, Seven>();
 
 // Subtraction can be done too.
 equal<Sub<Five, Three>, Two>();
+
+// We can perform operations on lists too.
+// This only type-checks if [1] + [2] = [1, 2]
+equal<
+    Append<
+        Cons<One, Nil>,
+        Cons<Two, Nil>
+    >,
+    Cons<One, Cons<Two, Nil>>
+>();
