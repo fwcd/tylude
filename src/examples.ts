@@ -20,6 +20,18 @@ proveExtends<Div<Four, Two>, Two>();
 proveExtends<Rem<Eight, Eight>, Zero>();
 proveExtends<Rem<Eight, Three>, Two>();
 
+// We can even perform primality tests.
+prove<Not<IsPrime<One>>>();
+prove<IsPrime<Two>>();
+prove<IsPrime<Three>>();
+prove<Not<IsPrime<Four>>>();
+prove<IsPrime<Five>>();
+prove<Not<IsPrime<Six>>>();
+prove<IsPrime<Seven>>();
+prove<Not<IsPrime<Eight>>>();
+prove<Not<IsPrime<Nine>>>();
+prove<Not<IsPrime<Ten>>>();
+
 // With comparison operators, we can check that
 // the numbers are ordered correctly.
 prove<Greater<One, Zero>>();

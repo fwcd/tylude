@@ -84,3 +84,24 @@ type Div<N, M> = DivWithRemImpl<N, M, Zero> extends [infer Q, infer _]
 type Rem<N, M> = DivWithRemImpl<N, M, Zero> extends [infer _, infer R]
     ? R
     : Fail<"Cannot compute remainder!">;
+
+// Divisibility test
+type Divides<N, M> = Equal<Rem<N, M>, Zero>
+
+// Primality test implementation (using trial division)
+type IsPrimeImpl<N, I> = LessOrEqual<N, One> extends True
+    ? False
+    : N extends Two
+        ? True
+        : GreaterOrEqual<I, Two> extends True
+            ? Divides<N, I> extends True
+                ? False
+                : I extends Succ<infer Iminus1>
+                    ? IsPrimeImpl<N, Iminus1>
+                    : Fail<"Index less than zero during primality test!">
+            : True;
+
+// Primality test
+type IsPrime<N> = N extends Succ<infer Nminus1>
+    ? IsPrimeImpl<N, Nminus1>
+    : False;
