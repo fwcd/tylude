@@ -10,13 +10,13 @@ A demonstration of TypeScript 4.1's [Recursive Conditional Types](https://devblo
 type Zero = { zero: true };
 type Succ<N> = { succ: N; };
 
+type One = Succ<Zero>;
+type Two = Succ<One>;
+
 type Add<N, M> = N extends Succ<infer I>
     ? Succ<Add<I, M>>
     : M;
 
 // Only type-checks if 1 + 1 = 2
-equal<
-    Add<Succ<Zero>, Succ<Zero>>,
-    Succ<Succ<Zero>>
->();
+equal<Add<One, One>, Two>();
 ```
