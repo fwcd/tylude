@@ -29,3 +29,9 @@ equal<
     Append<List2<One, Two>, List3<Three, Four, Five>>,
     List5<One, Two, Three, Four, Five>
 >();
+
+// Boolean operators
+equal<And<True, False>, False>();
+equal<And<True, True>, True>();
+equal<Or<True, False>, True>();
+equal<Not<True>, False>();
