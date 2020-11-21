@@ -12,6 +12,8 @@ proveEqual<
 proveEqual<Add<Two, Five>, Seven>();
 
 // Other arithmetic operations work too.
+// Note that multiplication can cause deeply nested
+// types, which may be buggy as of TS 4.1.
 proveEqual<Sub<Five, Three>, Two>();
 proveEqual<Four, Mult<Two, Two>>();
 
