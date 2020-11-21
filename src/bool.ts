@@ -29,3 +29,10 @@ type Xor<A, B> = A extends True
     : (B extends True
         ? True
         : False);
+
+// Equality
+type Equals<A, B> = B extends A
+    ? (A extends B
+        ? True
+        : False)
+    : False;
