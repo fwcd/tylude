@@ -1,1 +1,1 @@
-function equal<T1, T2 extends T1>() {}
+export function equal<T1, T2 extends T1>() {}
