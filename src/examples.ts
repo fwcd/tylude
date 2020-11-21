@@ -13,7 +13,7 @@ isEqual<Add<Two, Five>, Seven>();
 
 // Other arithmetic operations work too.
 isEqual<Sub<Five, Three>, Two>();
-isEqual<Add<One, Three>, Mult<Two, Two>>();
+isEqual<Four, Mult<Two, Two>>();
 
 // We can perform operations on lists too.
 // This only type-checks if [1] + [2] = [1, 2]
