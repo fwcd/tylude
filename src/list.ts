@@ -12,9 +12,16 @@ type List6<X, Y, Z, W, A, B> = Cons<X, List5<Y, Z, W, A, B>>;
 type List7<X, Y, Z, W, A, B, C> = Cons<X, List6<Y, Z, W, A, B, C>>;
 type List8<X, Y, Z, W, A, B, C, D> = Cons<X, List7<Y, Z, W, A, B, C, D>>;
 
+// Basic predicates
+type IsList<L> = L extends Cons<infer _, infer _>
+    ? True
+    : L extends Nil
+        ? True
+        : False;
+
 // Concatenation
 type Append<Xs, Ys> = Xs extends Cons<infer X, infer Rs>
     ? Cons<X, Append<Rs, Ys>>
-    : (Xs extends Nil
+    : Xs extends Nil
         ? Ys
-        : Fail<"Cannot append to non-list!">);
+        : Fail<"Cannot append to non-list!">;

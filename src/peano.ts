@@ -27,39 +27,41 @@ type Twenty = Succ<Nineteen>;
 // Basic predicates
 type IsNumber<N> = N extends Succ<infer _>
     ? True
-    : Equal<N, Zero>;
+    : N extends Nil
+        ? True
+        : False;
 
 // Addition
 type Add<N, M> = N extends Succ<infer Nminus1>
     ? Succ<Add<Nminus1, M>>
-    : (N extends Zero
+    : N extends Zero
         ? M
-        : Fail<"Cannot add non-number!">);
+        : Fail<"Cannot add non-number!">;
 
 // Subtraction
 type Sub<N, M> = M extends Succ<infer Jminus1>
-    ? (N extends Succ<infer Nminus1>
+    ? N extends Succ<infer Nminus1>
         ? Sub<Nminus1, Jminus1>
-        : Fail<"Cannot subtract below zero!">)
+        : Fail<"Cannot subtract below zero!">
     : N;
 
 // Multiplication
 type Mult<N, M> = N extends Succ<infer Nminus1>
     ? Add<M, Mult<Nminus1, M>>
-    : (N extends Zero
+    : N extends Zero
         ? Zero
-        : Fail<"Cannot multiply non-number!">)
+        : Fail<"Cannot multiply non-number!">
 
 // '<=' implementation (by repeatedly subtracting both sides until one of them is 0)
 type LessOrEqual<N, M> = N extends Succ<infer Nminus1>
-    ? (M extends Succ<infer J>
+    ? M extends Succ<infer J>
         ? LessOrEqual<Nminus1, J>
-        : (M extends Zero
+        : M extends Zero
             ? False
-            : Fail<"Cannot compare when right-hand side is non-number!">))
-    : (N extends Zero
+            : Fail<"Cannot compare when right-hand side is non-number!">
+    : N extends Zero
         ? True
-        : Fail<"Cannot compare when left-hand side is non-number!">);
+        : Fail<"Cannot compare when left-hand side is non-number!">;
 
 // '>', '>=' and '<' implementation (derived from '<=')
 type Greater<N, M> = Catch<LessOrEqual<N, M>, Not<LessOrEqual<N, M>>>;
@@ -69,9 +71,9 @@ type Less<N, M> = Catch<LessOrEqual<N, M>, Not<GreaterOrEqual<N, M>>>;
 // Division with remainder implementation (by repeatedly subtracting)
 type DivWithRemImpl<N, M, Q> = M extends Zero
     ? Fail<"Cannot divide by zero!">
-    : (Less<N, M> extends True
+    : Less<N, M> extends True
         ? [Q, N]
-        : DivWithRemImpl<Sub<N, M>, M, Succ<Q>>);
+        : DivWithRemImpl<Sub<N, M>, M, Succ<Q>>;
 
 // Division
 type Div<N, M> = DivWithRemImpl<N, M, Zero> extends [infer Q, infer _]

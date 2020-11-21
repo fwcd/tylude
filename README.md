@@ -21,7 +21,7 @@ type Add<N, M> = N extends Succ<infer Nminus1>
     : M;
 
 // Example: Only type-checks if 1 + 1 = 2
-proveEqual<Add<One, One>, Two>();
+proveExtends<Add<One, One>, Two>();
 ```
 
 ### Lists
@@ -42,7 +42,7 @@ type Append<Xs, Ys> = Xs extends Cons<infer X, infer Rs>
     : Ys;
 
 // Example: Only type-checks if [1] + [2, 3] = [1, 2, 3]
-proveEqual<
+proveExtends<
     Append<List1<1>, List2<2, 3>>,
     List3<1, 2, 3>
 >();
