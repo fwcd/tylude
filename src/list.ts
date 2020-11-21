@@ -1,5 +1,5 @@
 // Lists
-type Nil = { nil: true };
+type Nil = "Nil";
 type Cons<X, Xs> = { x: X, xs: Xs };
 
 // Aliases for convenience

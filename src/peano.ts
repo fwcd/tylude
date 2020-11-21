@@ -1,5 +1,5 @@
 // Peano numbers
-type Zero = { zero: true };
+type Zero = "Zero";
 type Succ<N> = { succ: N; };
 
 // Aliases for convenience
@@ -13,6 +13,16 @@ type Seven = Succ<Six>;
 type Eight = Succ<Seven>;
 type Nine = Succ<Eight>;
 type Ten = Succ<Nine>;
+type Eleven = Succ<Ten>;
+type Twelve = Succ<Eleven>;
+type Thirteen = Succ<Twelve>;
+type Fourteen = Succ<Thirteen>;
+type Fifteen = Succ<Fourteen>;
+type Sixteen = Succ<Fifteen>;
+type Seventeen = Succ<Sixteen>;
+type Eighteen = Succ<Seventeen>;
+type Nineteen = Succ<Eighteen>;
+type Twenty = Succ<Nineteen>;
 
 // Addition
 type Add<N, M> = N extends Succ<infer I>
@@ -27,3 +37,10 @@ type Sub<N, M> = M extends Succ<infer J>
         ? Sub<I, J>
         : Fail<"Cannot subtract below zero!">)
     : N;
+
+// Multiplication
+type Mult<N, M> = N extends Succ<infer I>
+    ? Add<M, Mult<I, M>>
+    : (N extends Zero ?
+        Zero
+        : Fail<"Cannot multiply non-number!">)

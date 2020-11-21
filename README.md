@@ -8,7 +8,7 @@ A demonstration of TypeScript 4.1's [Recursive Conditional Types](https://devblo
 
 ```typescript
 // Peano numbers
-type Zero = { zero: true };
+type Zero = "Zero";
 type Succ<N> = { succ: N; };
 
 // Aliases for convenience
@@ -28,7 +28,7 @@ isEqual<Add<One, One>, Two>();
 
 ```typescript
 // Lists
-type Nil = { nil: true };
+type Nil = "Nil";
 type Cons<X, Xs> = { x: X, xs: Xs };
 
 // Aliases for convenience

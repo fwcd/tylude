@@ -1,6 +1,6 @@
 // Booleans
-type True = { _true: true };
-type False = { _false: true };
+type True = true;
+type False = false;
 
 // Negation
 type Not<A> = A extends True
