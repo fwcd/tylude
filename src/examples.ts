@@ -1,22 +1,22 @@
-import { equal } from "./predicates";
+import { isEqual, isTrue, isFalse } from "./predicates";
 
 // Using Peano arithemtic, we can add numbers.
 // This example only type-checks if 1 + 1 = 2.
-equal<
+isEqual<
     Add<Succ<Zero>, Succ<Zero>>,
     Succ<Succ<Zero>>
 >();
 
 // Using aliases, we can concisely express larger
 // computations too.
-equal<Add<Two, Five>, Seven>();
+isEqual<Add<Two, Five>, Seven>();
 
 // Subtraction can be done too.
-equal<Sub<Five, Three>, Two>();
+isEqual<Sub<Five, Three>, Two>();
 
 // We can perform operations on lists too.
 // This only type-checks if [1] + [2] = [1, 2]
-equal<
+isEqual<
     Append<
         Cons<One, Nil>,
         Cons<Two, Nil>
@@ -25,13 +25,13 @@ equal<
 >();
 
 // Similarly, we can use aliases for small lists:
-equal<
+isEqual<
     Append<List2<One, Two>, List3<Three, Four, Five>>,
     List5<One, Two, Three, Four, Five>
 >();
 
 // Boolean operators
-equal<And<True, False>, False>();
-equal<And<True, True>, True>();
-equal<Or<True, False>, True>();
-equal<Not<True>, False>();
+isEqual<And<True, False>, False>();
+isEqual<And<True, True>, True>();
+isTrue<Or<True, False>>();
+isFalse<Not<True>>();

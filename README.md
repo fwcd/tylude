@@ -21,7 +21,7 @@ type Add<N, M> = N extends Succ<infer I>
     : M;
 
 // Example: Only type-checks if 1 + 1 = 2
-equal<Add<One, One>, Two>();
+isEqual<Add<One, One>, Two>();
 ```
 
 ### Lists
@@ -44,7 +44,7 @@ type Append<Xs, Ys> = Xs extends Cons<infer X, infer Rs>
         : Fail<"Cannot append to non-list!">);
 
 // Example: Only type-checks if [1] + [2, 3] = [1, 2, 3]
-equal<
+isEqual<
     Append<List1<1>, List2<2, 3>>,
     List3<1, 2, 3>
 >();
