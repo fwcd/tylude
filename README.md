@@ -16,8 +16,8 @@ type One = Succ<Zero>;
 type Two = Succ<One>;
 
 // Addition
-type Add<N, M> = N extends Succ<infer I>
-    ? Succ<Add<I, M>>
+type Add<N, M> = N extends Succ<infer Nminus1>
+    ? Succ<Add<Nminus1, M>>
     : M;
 
 // Example: Only type-checks if 1 + 1 = 2
@@ -39,9 +39,7 @@ type List3<X, Y, Z> = Cons<X, List2<Y, Z>>;
 // Concatenation
 type Append<Xs, Ys> = Xs extends Cons<infer X, infer Rs>
     ? Cons<X, Append<Rs, Ys>>
-    : (Xs extends Nil
-        ? Ys
-        : Fail<"Cannot append to non-list!">);
+    : Ys;
 
 // Example: Only type-checks if [1] + [2, 3] = [1, 2, 3]
 proveEqual<

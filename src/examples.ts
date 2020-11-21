@@ -16,6 +16,9 @@ proveEqual<Add<Two, Five>, Seven>();
 // types, which may be buggy as of TS 4.1.
 proveEqual<Sub<Five, Three>, Two>();
 proveEqual<Four, Mult<Two, Two>>();
+proveEqual<Div<Four, Two>, Two>();
+proveEqual<Rem<Eight, Eight>, Zero>();
+proveEqual<Rem<Eight, Three>, Two>();
 
 // With comparison operators, we can check that
 // the numbers are ordered correctly.
